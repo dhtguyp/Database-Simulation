@@ -45,8 +45,8 @@ class Repository:
     def execute_order(self, location, topping):
         supplier_id = self.hat_dao.get_topping_supplier_id(topping)
         supplier_name = self.supplier_dao.get_supplier_name(supplier_id)
-        hat_id = self.hat_dao.get_hat_id(supplier_id)
-        self.hat_dao.decrease_quantity(supplier_id)
+        hat_id = self.hat_dao.get_hat_id(topping, supplier_id)
+        self.hat_dao.decrease_quantity(hat_id, supplier_id)
         self.create_order_record(location, hat_id)
         return topping, supplier_name, location
 
